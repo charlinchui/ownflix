@@ -1,0 +1,236 @@
+@property --color1 {
+  syntax: '<color>';
+  initial-value: red;
+  inherits: false;
+}
+
+@property --color2 {
+  syntax: '<color>';
+  initial-value: rgba(0,0,0,0);
+  inherits: false;
+}
+
+:root {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  padding: 0%;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: rgba(10,10,10);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0%;
+  padding: 0%;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+#app {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  min-height: 100vh;
+  max-width: 100vw;
+}
+
+#shows{
+  display:flex;
+  width: 80vw;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 5vh;
+}
+
+.show{
+  flex-basis: 1/3;
+  position: relative;
+  display:flex;
+  flex-direction: column;
+  min-width: 20%;
+  max-width: 20%;
+  margin: 2.5%;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.cover{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  background: #25252d;
+  box-shadow: 5px 5px 21px #0f0f12,
+             -5px -5px 21px #3b3b48;
+  transition: 200ms;
+}
+
+.show-title{
+  display: block; 
+  text-align: start;  
+  bottom: 0%;
+  position: absolute;
+  font-size: large;
+  color: white;
+  font-weight: 700;
+  background-image:  linear-gradient(rgba(0,0,0,0),black);
+  width: 100%;
+  height: 70%;
+  border-radius: inherit;
+  text-indent: 3%;
+  transition: 200ms;
+}
+
+.show:hover > .show-title{
+  height: 100%;
+}
+
+.show:hover > .cover{
+  scale: 1.2;
+}
+
+.title-text{
+  position:absolute;
+  bottom:10%;
+  width: 100%;
+}
+
+#navbar{
+  position: fixed;
+  top: 0%;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  max-width: 100vw;
+  height: 5vh;
+  background: linear-gradient(var(--color1), var(--color2));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: --color2 500ms;
+}
+
+html:not([data-scroll='0']) {
+  #navbar{
+    --color2: red;
+  }
+}
+
+#navbar-left{
+  width: 300px;
+  margin:15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#logo{
+  font-weight: bolder;
+  color: rgb(10,10,10);
+  text-shadow: 1px 1px 5px rgba(225, 17, 17, 0.515);
+}
+
+#search{
+  background-color: rgba(0,0,0,0);
+  border: none;
+  cursor: pointer;
+}
+
+#searchbar{
+  background-color: black;
+  border: none;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  visibility: hidden;
+  width: 0;
+  transition: 500ms;
+  border: 1px white solid;
+}
+
+#searchbar:focus{
+  outline: none;
+}
+
+.nav-item{
+  cursor: pointer;
+}
+
+#navbar-right{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+#search-icon{
+  color: white;
+}
+
+#episodes{
+  margin-top: 5vh;
+  width: 100vw;
+}
+
+.episode{
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px white solid;
+  cursor: pointer;
+}
+
+.episode-title{
+  font-weight: bolder;
+  margin: 15px;
+}
+
+#video-player{
+  max-width: 100vw;
+  min-height: 100vh;
+}
+
+@media(max-width:1400px){
+  .show {
+    min-width: 28.3%;
+    max-width: 28.3%;
+  }
+  #shows{
+    padding-right:0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+#back{
+  position: absolute;
+  color: white;
+  top: 20px;
+  left: 15px;
+  background-color: rgba(0,0,0,0);
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .show {
+    min-width: 40%;
+    max-width: 40%;
+  }
+}
