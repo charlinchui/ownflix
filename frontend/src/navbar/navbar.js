@@ -65,7 +65,7 @@ for (const [key, value] of Object.entries(elements)) {
                     showDiv.append(titleDiv);
                     shows.append(showDiv);
 
-                    showDiv.addEventListener('click', (e)=>{
+                    showDiv.addEventListener('click', ()=>{
                         localStorage.setItem('show', JSON.stringify(show));
                         window.location.href = 'episode-list.html';
                     });
@@ -77,13 +77,13 @@ for (const [key, value] of Object.entries(elements)) {
 navbar.append(leftPack);
 navbar.append(rightPack);
 
-searchButton.addEventListener('click', (e) => {
+searchButton.addEventListener('click', () => {
     searchBar.style.width = '200px';
     searchBar.style.visibility = 'visible';
     setTimeout(() => { searchBar.focus() }, 50);
 });
 
-searchBar.addEventListener('focusout', (e) => {
+searchBar.addEventListener('focusout', () => {
     searchBar.style.width = '0px';
     searchBar.style.visibility = 'hidden';
     searchBar.value = '';
