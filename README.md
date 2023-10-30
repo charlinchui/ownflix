@@ -2,10 +2,10 @@
 
 ### Just create a folder inside the backend called shows with the following structure:
 ```
-/backend
-└── /shows
-    ├── /show-1
-    │   ├── /episodes
+backend/
+└── shows/
+    ├── show-1/
+    │   ├── episodes/
     │   │    ├── episode-1.mp4
     ... │    ...
     │   │    └── episode-n.mp4
@@ -15,8 +15,8 @@
     │       ├── pathName
     │       ├── image
     │       └── type(movie/show)
-    └── /show-n
-        ├── /episodes
+    └── show-n/
+        ├── episodes/
         │    ├── episode-1.mp4
         │    ...
         │    └── episode-n.mp4
