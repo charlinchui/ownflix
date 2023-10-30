@@ -2,7 +2,7 @@
 
 ### Just create a folder inside the backend called shows with the following structure:
 ```
-.
+backend
 └── shows
     ├── show-1
     │   ├── episodes
