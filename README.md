@@ -1,6 +1,6 @@
 # A Simple Netflix Clone To Stream Videos Locally
 
-## Just create a folder inside the backend called shows with the following structure:
+### Just create a folder inside the backend called shows with the following structure:
 ```
 .
 └── shows
@@ -27,3 +27,5 @@
             ├── image
             └── type(movie/show)
 ```
+### Start the backend by going into the backend folder and running ```go run .```
+### Start the frontend by going into the frontend folder and running ```npm run dev```
