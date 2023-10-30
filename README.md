@@ -2,24 +2,24 @@
 
 ### Just create a folder inside the backend called shows with the following structure:
 ```
-backend
-└── shows
-    ├── show-1
-    │   ├── episodes
-    │   │    ├── episode-1
+/backend
+└── /shows
+    ├── /show-1
+    │   ├── /episodes
+    │   │    ├── episode-1.mp4
     ... │    ...
-    │   │    └── episode-n
+    │   │    └── episode-n.mp4
     │   ├── cover.jpg
     │   └── info.json
     │       ├── name
     │       ├── pathName
     │       ├── image
     │       └── type(movie/show)
-    └── show-n
-        ├── episodes
-        │    ├── episode-1
+    └── /show-n
+        ├── /episodes
+        │    ├── episode-1.mp4
         │    ...
-        │    └── episode-n
+        │    └── episode-n.mp4
         ├── cover.jpg
         └── info.json
             ├── name
