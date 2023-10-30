@@ -88,3 +88,17 @@ searchBar.addEventListener('focusout', (e) => {
     searchBar.style.visibility = 'hidden';
     searchBar.value = '';
 });
+
+searchBar.addEventListener('input', ()=>{
+    const searchTerm = searchBar.value.toLowerCase();
+    const shows = document.getElementById('shows');
+    const showElements = shows.getElementsByClassName('show');
+    for (const show of showElements) {
+        const showText = show.textContent.toLowerCase();
+        if (showText.includes(searchTerm)) {
+            show.style.display = "block";
+        } else {
+            show.style.display = "none";
+        }
+    }
+});
