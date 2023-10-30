@@ -27,6 +27,9 @@ var baseDirectory string = "./shows"
 func main() {
 	r := gin.Default()
 
+	r.ForwardedByClientIP = true
+	r.SetTrustedProxies([]string{"127.0.0.1", "192.168.1.2", "10.0.0.0/8"})
+
 	//CORS Handler :
 	r.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"http://localhost:5173"},
@@ -58,15 +61,13 @@ func main() {
 		serveVideo(c)
 	})
 
-	// Define a route for serving the cover images
 	r.StaticFS("/covers", http.Dir(path.Join(baseDirectory)))
 	r.Run(":8080")
 }
 
 func getShows(c *gin.Context, showType string) {
-	// Define the base directory where your categories are stored
 
-	categories, err := os.ReadDir(baseDirectory)
+	shows, err := os.ReadDir(baseDirectory)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -74,7 +75,7 @@ func getShows(c *gin.Context, showType string) {
 
 	var showList []Show
 
-	for _, show := range categories {
+	for _, show := range shows {
 		if show.IsDir() {
 			showPath := path.Join(baseDirectory, show.Name())
 			showJSONPath := path.Join(showPath, "info.json")
@@ -93,7 +94,6 @@ func getShows(c *gin.Context, showType string) {
 					return
 				}
 
-				// Check if the show type matches the requested type or if "all" is requested
 				if showType == "" || show.Type == showType {
 					showList = append(showList, show)
 				}
@@ -107,7 +107,6 @@ func getShows(c *gin.Context, showType string) {
 func getShowVideos(c *gin.Context) {
 	showName := c.Param("showName")
 
-	// Construct the Show directory path
 	showPath := path.Join(baseDirectory, showName)
 	episodesPath := path.Join(showPath, "episodes")
 
@@ -133,7 +132,6 @@ func serveVideo(c *gin.Context) {
 	showName := c.Param("showName")
 	videoName := c.Param("videoName")
 
-	// Construct the full path to the video file
 	videoPath := path.Join(baseDirectory, showName, "episodes", videoName)
 
 	c.File(videoPath)
