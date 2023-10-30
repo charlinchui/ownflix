@@ -28,4 +28,6 @@
             └── type(movie/show)
 ```
 ### Start the backend by going into the backend folder and running ```go run .```
-### Start the frontend by going into the frontend folder and running ```npm run dev```
+### Start the frontend by going into the frontend folder, installing all the dependencies (```npm install```) and running ```npm run dev```
+
+(You need [go](https://go.dev/) installed to run the server and [node + npm](https://nodejs.org/en) to run the client)
