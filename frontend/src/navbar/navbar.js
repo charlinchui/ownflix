@@ -31,10 +31,10 @@ for (const [key, value] of Object.entries(elements)) {
     navItem.textContent = key;
     leftPack.append(navItem);
     navItem.addEventListener('click', (e) => {
-        const app = document.getElementById('app');
+        if(window.location.href.includes(".html")){
+            window.location.href = '/';
+        }
         const shows = document.getElementById('shows') || document.createElement('div');
-        const episodes = document.getElementById('episodes') || document.createElement('div');
-        episodes.id = 'episodes';
         while (shows.firstChild) {
             shows.removeChild(shows.firstChild);
         }
@@ -65,71 +65,11 @@ for (const [key, value] of Object.entries(elements)) {
                     showDiv.append(titleDiv);
                     shows.append(showDiv);
 
-                    showDiv.addEventListener('click', (e) => {
-                        fetch(`http://localhost:8080/shows/${show.pathName}/videos`)
-                            .then(res => {
-                                if (res.ok) {
-                                    return res.json();
-                                } else {
-                                    throw new Error('Failed to fetch series data');
-                                }
-                            }).then(data => {
-                                while (episodes.firstChild) {
-                                    episodes.removeChild(episodes.firstChild);
-                                }
-                                let i = 1;
-                                data.forEach(ep => {
-                                    const epDiv = document.createElement('div');
-                                    const epTitle = document.createElement('span');
-                                    epDiv.className = 'episode';
-                                    epTitle.className = 'episode-title';
-                                    if (show.type === 'show') {
-                                        epTitle.innerHTML = `${show.name} ${i}`;
-                                        i++;
-                                    }
-                                    epDiv.addEventListener('click', (e) =>{
-                                        fetch(`http://localhost:8080/videos/${show.pathName}/${ep.name}`)
-                                        .then(res => {
-                                          if (res.ok) {
-                                            return res.url;
-                                          } else {
-                                            throw new Error('Failed to fetch video data');
-                                          }
-                                        }).then(videoURL => {
-                                            const backArrow = document.createElement('button');
-                                            createSVGElement('../src/navbar/arrow-left.svg', backArrow, 'search-icon');
-                                            backArrow.id = 'back';
-                                            app.innerHTML = '';
-                                            const video = document.createElement('video');
-                                            video.controls = true;
-                                            video.id = 'video-player';
-                                            video.src = videoURL;
-                                            video.autoplay = true;
-                                            app.appendChild(video);
-                                            app.append(backArrow);
-                                            backArrow.addEventListener(e =>{
-                                              console.log("Clicked")
-                                            });
-                                          }).catch(error => {
-                                          console.error("error fetching episode ->", error);
-                                        });
-                                    });
-                                    epDiv.append(epTitle);
-                                    episodes.append(epDiv);
-                                    if(episodes){
-                                        app.removeChild(shows);
-                                        app.appendChild(episodes);
-                                      }
-                                });
-                            }
-                            )
+                    showDiv.addEventListener('click', (e)=>{
+                        localStorage.setItem('show', JSON.stringify(show));
+                        window.location.href = 'episode-list.html';
                     });
                 });
-                if(episodes.firstChild) {
-                    shows.id = 'shows';
-                    app.removeChild(episodes);
-                    app.appendChild(shows);
-                }
             })
     });
 };
